@@ -1,4 +1,5 @@
 ﻿using LibDeltaSystem;
+using LibDeltaSystem.Tools;
 using LibDeltaSystem.Tools.DeltaWebFormat;
 using LibDeltaSystem.WebFramework;
 using Microsoft.AspNetCore.Http;
@@ -14,7 +15,10 @@ namespace DeltaWebMap.PrimalPackageManager.Services
     {
         public PackageDWFService(DeltaConnection conn, HttpContext e) : base(conn, e)
         {
+            epoch = TimeTool.GetStandardEpochFromTicks(DateTime.UtcNow.Ticks);
         }
+
+        int epoch;
 
         public override async Task WritePackageResponse(object[] data, Type dataType)
         {
@@ -24,6 +28,7 @@ namespace DeltaWebMap.PrimalPackageManager.Services
                 DeltaWebFormatEncoder encoder = new DeltaWebFormatEncoder(ms, dataType);
                 encoder.Encode(data, new Dictionary<byte, byte[]>()
                 {
+                    {0, BitConverter.GetBytes(epoch) }
                 });
                 ms.Position = 0;
                 e.Response.ContentType = "application/octet-stream";
