@@ -74,8 +74,8 @@ namespace DeltaWebMap.PrimalPackageManager.Services
                     package_type = r.package_type,
                     entity_count = await r.CountItemsAsync(conn, p.last_epoch),
                     display_name = r.display_name,
-                    package_url_dwf = conn.config.hosts.packages + "/packages/DWF/" + r.name,
-                    package_url_json = conn.config.hosts.packages + "/packages/JSON/" + r.name
+                    package_url_dwf = conn.hosts.packages + "/packages/DWF/" + r.name,
+                    package_url_json = conn.hosts.packages + "/packages/JSON/" + r.name
                 });
             }
 

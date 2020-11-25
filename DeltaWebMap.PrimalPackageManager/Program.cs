@@ -10,12 +10,12 @@ namespace DeltaWebMap.PrimalPackageManager
         public static DeltaConnection conn;
 
         public const byte APP_VERSION_MAJOR = 0;
-        public const byte APP_VERSION_MINOR = 2;
+        public const byte APP_VERSION_MINOR = 3;
         
         static void Main(string[] args)
         {
             //Connect to database
-            conn = DeltaConnection.InitDeltaManagedApp(args, APP_VERSION_MAJOR, APP_VERSION_MINOR, new PrimalPackageManagerNetwork());
+            conn = DeltaConnection.InitDeltaManagedApp(args, DeltaCoreNetServerType.API_PRIMAL_PACKAGE_MANAGER, APP_VERSION_MAJOR, APP_VERSION_MINOR);
 
             //Start server
             DeltaWebServer server = new DeltaWebServer(conn, conn.GetUserPort(0));
